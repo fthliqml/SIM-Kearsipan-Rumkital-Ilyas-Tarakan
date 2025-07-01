@@ -1,0 +1,311 @@
+// ===== Sidebar =====
+$primary-green: #2c4a27;
+$light-green: #d4edda;
+$hover-green: #218838;
+$success-green: #20c997;
+
+$sidebar-width: 300px;
+$sidebar-collapsed-width: 70px;
+$transition-speed: 0.3s;
+
+$white-alpha-10: rgba(255, 255, 255, 0.1);
+$white-alpha-15: rgba(255, 255, 255, 0.15);
+$white-alpha-20: rgba(255, 255, 255, 0.2);
+$white-alpha-25: rgba(255, 255, 255, 0.25);
+$white-alpha-80: rgba(255, 255, 255, 0.8);
+$white-alpha-90: rgba(255, 255, 255, 0.9);
+
+$black-alpha-20: rgba(0, 0, 0, 0.2);
+$black-alpha-60: rgba(0, 0, 0, 0.6);
+
+// ===== MIXINS =====
+@mixin transition($property: all, $duration: $transition-speed, $timing: ease) {
+    transition: $property $duration $timing;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin card-shadow {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+@mixin hover-transform($x: 5px) {
+    &:hover {
+        transform: translateX($x);
+    }
+}
+
+// ===== SIDEBAR STYLES =====
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: $sidebar-width;
+    background: $primary-green;
+    @include transition(width, $transition-speed, ease-in-out);
+    z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+
+    &.collapsed {
+        width: $sidebar-collapsed-width;
+
+        .sidebar-header {
+            justify-content: center; // Center the toggle button
+            padding: 20px 10px; // Reduce padding
+
+            #sidebar-header {
+                opacity: 0;
+                visibility: hidden;
+                width: 0;
+                overflow: hidden;
+            }
+        }
+
+        .sidebar-menu {
+            > li > a {
+                justify-content: center;
+
+                i {
+                    margin-right: 0;
+                }
+
+                span {
+                    opacity: 0;
+                    visibility: hidden;
+                    width: 0;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        .submenu {
+            display: none !important;
+        }
+
+        .dropdown-arrow {
+            display: none !important;
+        }
+
+        // Tooltip untuk collapsed state
+        .sidebar-menu > li > a {
+            position: relative;
+
+            &::after {
+                content: attr(data-tooltip);
+                position: absolute;
+                left: calc(100% + 10px);
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 14px;
+                white-space: nowrap;
+                opacity: 0;
+                visibility: hidden;
+                @include transition(opacity, 0.2s);
+                z-index: 1001;
+                pointer-events: none;
+            }
+
+            &:hover::after {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    // Custom scrollbar
+    &::-webkit-scrollbar {
+        width: 6px;
+
+        &-track {
+            background: $white-alpha-10;
+        }
+
+        &-thumb {
+            background: $white-alpha-20;
+            border-radius: 3px;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+}
+
+// ===== SIDEBAR HEADER - FIXED =====
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid $white-alpha-20;
+    @include flex-between;
+    background-color: $primary-green;
+    @include transition(all, $transition-speed);
+
+    #sidebar-header {
+        color: white;
+        margin: 0;
+        font-weight: 700;
+        font-size: 18px;
+        white-space: nowrap;
+        opacity: 1;
+        visibility: visible;
+        @include transition(all, $transition-speed);
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+// ===== SIDEBAR TOGGLE =====
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    @include transition();
+    flex-shrink: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    position: relative;
+    z-index: 1001;
+
+    &:hover {
+        background-color: $white-alpha-20;
+        transform: scale(1.1);
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+// ===== SIDEBAR MENU =====
+.sidebar-menu {
+    padding: 15px 0;
+    list-style: none;
+    margin: 0;
+
+    li {
+        margin: 0;
+    }
+
+    > li > a {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 15px 20px;
+        color: $white-alpha-90;
+        text-decoration: none;
+        @include transition();
+        position: relative;
+        font-weight: 500;
+
+        &:hover {
+            background-color: $white-alpha-15;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        &.active {
+            background-color: #195165;
+            color: white;
+            border-right: 4px solid #fff;
+        }
+    }
+
+    a {
+        i {
+            font-size: 18px;
+            width: 30px;
+            text-align: center;
+            margin-right: 15px;
+            @include transition(margin, $transition-speed);
+            flex-shrink: 0;
+        }
+
+        span {
+            white-space: nowrap;
+            opacity: 1;
+            visibility: visible;
+            @include transition(all, $transition-speed);
+        }
+    }
+}
+
+// ===== SUBMENU STYLES =====
+.submenu {
+    background-color: $black-alpha-20;
+    max-height: 0;
+    overflow: hidden;
+    @include transition(max-height, 0.4s, ease-in-out);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &.show {
+        max-height: 400px;
+    }
+
+    li {
+        margin: 0;
+        &:hover {
+            background-color: $white-alpha-10 !important;
+            border-left-color: #fff;
+            color: white !important;
+            transform: translateX(3px);
+        }
+
+        &.active {
+            background-color: $white-alpha-20 !important;
+            border-left-color: #fff;
+            color: white !important;
+        }
+    }
+
+    a {
+        display: block;
+        padding: 12px 20px 12px 45px !important;
+        font-size: 14px;
+        color: $white-alpha-80 !important;
+        border-left: 3px solid transparent;
+        @include transition();
+        text-decoration: none;
+    }
+}
+
+.dropdown-arrow {
+    margin-left: auto;
+    @include transition(transform, 0.3s);
+    font-size: 12px;
+    flex-shrink: 0;
+
+    &.rotated {
+        transform: rotate(180deg);
+    }
+}

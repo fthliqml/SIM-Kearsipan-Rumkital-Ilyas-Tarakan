@@ -1,0 +1,33 @@
+/* warna & tampilan field */
+$form-border-color: #bdbdbd;
+
+.form-horizontal {
+    /* input + select */
+    .form-control,
+    .form-select {
+        border: 2px solid $form-border-color;
+        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+    }
+
+    /* textarea lebih tinggi */
+    textarea.form-control {
+        min-height: 220px;
+    }
+
+    /* —— LABEL —— */
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem; // default (mobile & <1400) label-di-atas
+    }
+
+    /* ≥ 1400 px (xxl) baru dibuat sejajar */
+    @media (min-width: 1400px) {
+        .form-label {
+            margin-bottom: 0;
+            padding-top: 0.6rem; // vertikal-align dengan field
+            text-align: start;
+        }
+    }
+}
