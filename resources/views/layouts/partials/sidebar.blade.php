@@ -17,7 +17,7 @@
     <ul class="sidebar-menu">
         <!-- Dashboard -->
         <li>
-            <a href="/  " class="menu-item active" data-tooltip="Dashboard">
+            <a href="/dashboard" class="menu-item active" data-tooltip="Dashboard">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
