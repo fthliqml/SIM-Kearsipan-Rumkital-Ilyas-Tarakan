@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArsipMedisController;
 use App\Http\Controllers\ArsipTUController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailBerkasController;
@@ -13,6 +14,7 @@ Route::get('/', function () {
 });
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/arsip-tu/{jenis}', [ArsipTUController::class, 'index'])->name('arsip-tu.index');
+Route::get('/arsip-medis/{jenis}', [ArsipMedisController::class, 'index'])->name('arsip-medis.index');
 Route::get('/unggah-berkas', [UnggahBerkasController::class, 'index']);
 Route::get('/detail-berkas', [DetailBerkasController::class, 'index']);
 Route::get('/referensi-5-tahun', [ReferensiController::class, 'index']);

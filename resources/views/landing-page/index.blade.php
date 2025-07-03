@@ -34,7 +34,7 @@
 
                 <!-- 1. Arsip -->
                 <div class="col-12 col-md-6 col-lg-4">
-                    <a href="/arsip-tu" class="feature-card d-flex gap-3 align-items-start">
+                    <a href="/arsip-tu/surat-masuk" class="feature-card d-flex gap-3 align-items-start">
                         <div class="icon-box icon-arsip">
                             <i class="fa-solid fa-folder"></i>
                         </div>

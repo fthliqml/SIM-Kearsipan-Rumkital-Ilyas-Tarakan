@@ -58,6 +58,22 @@ $breakpoints: (
     }
 }
 
+.btn-light-primary {
+    background-color: lighten(#0e90cb, 42%); // biru muda pastel
+    border-color: lighten(#0e90cb, 42%);
+    color: #0e90cb; // teks biru asli
+
+    &:hover,
+    &:focus {
+        background-color: lighten(
+            #0e90cb,
+            32%
+        ); // sedikit lebih gelap saat hover
+        border-color: lighten(#0e90cb, 32%);
+        color: #0e90cb;
+    }
+}
+
 .btn-outline-light-blue {
     color: #0e90cb;
     border-color: #0e90cb;
@@ -146,7 +162,7 @@ $hint: #b1b3b6;
     .input-group {
         border: 2px solid $border;
         border-radius: 6px;
-        overflow: hidden; // potong sudut anak
+        overflow: hidden;
     }
 
     .input-group-text {
@@ -154,22 +170,21 @@ $hint: #b1b3b6;
         justify-content: center;
         background: $bg;
         border: 0;
-        border-right: 2px solid $border; // garis pemisah vertikal
+        border-right: 2px solid $border;
         font-size: 1.1rem;
-        padding: 0; // biar ikon pas tengah
+        padding: 0;
     }
 
     .form-control {
         background: $bg;
-        border: 0; // hilangkan border default
-        font-weight: 600;
+        border: 0;
 
         &::placeholder {
             color: $hint;
         }
 
         &:focus {
-            box-shadow: none; // hilang efek fokus biru Bootstrap
+            box-shadow: none;
         }
     }
 }

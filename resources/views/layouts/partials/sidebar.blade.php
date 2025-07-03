@@ -57,11 +57,16 @@
                 <i class="fas fa-chevron-down dropdown-arrow"></i>
             </a>
             <ul class="submenu" id="arsipMedisSubmenu">
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Sertifikat</a></li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Surat Hibah</a></li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Barang Masuk</a></li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Pengadaan Alat</a></li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Pembelian</a></li>
+                <li><a href="/arsip-medis/sertifikat" class="submenu-item"><i
+                            class="fa-regular fa-folder"></i>Sertifikat</a></li>
+                <li><a href="/arsip-medis/surat-hibah" class="submenu-item"><i class="fa-regular fa-folder"></i>Surat
+                        Hibah</a></li>
+                <li><a href="/arsip-medis/barang-masuk" class="submenu-item"><i class="fa-regular fa-folder"></i>Barang
+                        Masuk</a></li>
+                <li><a href="/arsip-medis/pengadaan-alat" class="submenu-item"><i
+                            class="fa-regular fa-folder"></i>Pengadaan Alat</a></li>
+                <li><a href="/arsip-medis/pembelian" class="submenu-item"><i
+                            class="fa-regular fa-folder"></i>Pembelian</a></li>
             </ul>
         </li>
 
