@@ -57,6 +57,9 @@ class SidebarManager {
             });
         }
 
+        // Handle dropdown toggles
+        this.bindDropdownToggles();
+
         // Handle window resize
         window.addEventListener("resize", () => {
             this.handleResponsive();
@@ -122,6 +125,64 @@ class SidebarManager {
         this.sidebarOverlay.classList.remove("show");
     }
 
+    closeAllSubmenus() {
+        const openSubmenus = document.querySelectorAll(".submenu.show");
+        openSubmenus.forEach((submenu) => {
+            submenu.classList.remove("show");
+            const parentToggle = submenu.previousElementSibling;
+            const arrow = parentToggle?.querySelector(".dropdown-arrow");
+            if (arrow) arrow.classList.remove("rotated");
+        });
+    }
+
+    bindDropdownToggles() {
+        const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+
+        dropdownToggles.forEach((toggle) => {
+            toggle.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Don't open submenus when sidebar is collapsed
+                if (this.sidebar?.classList.contains("collapsed")) {
+                    return;
+                }
+
+                const targetId = toggle.getAttribute("data-bs-target");
+                const submenu = document.querySelector(targetId);
+                const arrow = toggle.querySelector(".dropdown-arrow");
+
+                if (submenu) {
+                    // Close other open submenus first
+                    const otherSubmenus =
+                        document.querySelectorAll(".submenu.show");
+                    otherSubmenus.forEach((otherSubmenu) => {
+                        if (otherSubmenu !== submenu) {
+                            otherSubmenu.classList.remove("show");
+                            const otherParent =
+                                otherSubmenu.previousElementSibling;
+                            const otherArrow =
+                                otherParent?.querySelector(".dropdown-arrow");
+                            if (otherArrow)
+                                otherArrow.classList.remove("rotated");
+                        }
+                    });
+
+                    // Toggle current submenu
+                    const isCurrentlyOpen = submenu.classList.contains("show");
+
+                    if (isCurrentlyOpen) {
+                        submenu.classList.remove("show");
+                        if (arrow) arrow.classList.remove("rotated");
+                    } else {
+                        submenu.classList.add("show");
+                        if (arrow) arrow.classList.add("rotated");
+                    }
+                }
+            });
+        });
+    }
+
     loadSavedState() {
         const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
         console.log("Loading saved state:", isCollapsed);
@@ -143,6 +204,18 @@ class SidebarManager {
             item.classList.remove("active");
             if (item.getAttribute("href") === currentPath) {
                 item.classList.add("active");
+
+                // If it's a submenu item, also open its parent
+                if (item.classList.contains("submenu-item")) {
+                    const submenu = item.closest(".submenu");
+                    if (submenu) {
+                        submenu.classList.add("show");
+                        const parentToggle = submenu.previousElementSibling;
+                        const arrow =
+                            parentToggle?.querySelector(".dropdown-arrow");
+                        if (arrow) arrow.classList.add("rotated");
+                    }
+                }
             }
         });
     }

@@ -1,4 +1,4 @@
-@extends('layouts.vertical', ['title' => 'Arsip TU'])
+@extends('layouts.vertical', ['title' => 'Arsip TU - {{ $title }}'])
 
 @section('topbar')
     @include('layouts.partials.topbar')
@@ -9,7 +9,7 @@
         <div class="d-flex gap-3 align-items-center">
             <button class="btn btn-light-green rounded-pill fw-bold px-4 py-2" style="color: #5568ca">ARSIP</button>
             <button class="btn btn-grey rounded-pill fw-bold px-4 py-2" style="color: #5568ca">BERKAS TU</button>
-            <span class="">Surat Masuk</span>
+            <span class="">{{ $title }}</span>
         </div>
 
         <div class="d-flex flex-column flex-xxl-row gap-3 align-items-xxl-center">
@@ -35,15 +35,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($berkasList as $i => $obj)
+                            @foreach ($data as $item)
                                 <tr>
-                                    <td class="row-number">{{ $i + 1 }}</td>
-                                    <td>{{ $obj->nomor }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($obj->tanggal)->format('d M Y') }}</td>
-                                    <td>{{ $obj->jenis }}</td>
-                                    <td>{{ $obj->pengirim }}</td>
+                                    <td class="row-number">{{ $item->id }}</td>
+                                    <td>{{ $item->nama_berkas }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                                    <td>{{ $item->jenis }}</td>
+                                    <td>{{ $item->pengirim_penerima }}</td>
                                     <td>
-                                        <span class="status-badge status-{{ $obj->status }}">-</span>
+                                        <span class="status-badge status-{{ $item->status }}">-</span>
                                     </td>
                                 </tr>
                             @endforeach

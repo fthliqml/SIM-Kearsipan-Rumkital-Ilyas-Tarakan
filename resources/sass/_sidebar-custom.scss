@@ -296,6 +296,16 @@ $black-alpha-60: rgba(0, 0, 0, 0.6);
         border-left: 3px solid transparent;
         @include transition();
         text-decoration: none;
+
+        &.active {
+            background-color: $white-alpha-25 !important;
+            border-left-color: #fff !important;
+            color: white !important;
+            font-weight: 600;
+
+            // Slight transform for active state
+            transform: translateX(5px);
+        }
     }
 }
 

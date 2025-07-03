@@ -17,7 +17,7 @@
     <ul class="sidebar-menu">
         <!-- Dashboard -->
         <li>
-            <a href="/dashboard" class="menu-item active" data-tooltip="Dashboard">
+            <a href="/  " class="menu-item active" data-tooltip="Dashboard">
                 <i class="fas fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
@@ -25,19 +25,24 @@
 
         <!-- Arsip TU dengan Submenu -->
         <li>
-            <a href="/arsip-tu" class="menu-item" data-tooltip="Arsip TU">
+            <a href="#" class="menu-item dropdown-toggle" data-tooltip="Arsip TU"
+                data-bs-target="#arsipTuSubmenu">
                 <i class="fa-regular fa-folder-open"></i>
                 <span>Arsip TU</span>
                 <i class="fas fa-chevron-down dropdown-arrow"></i>
             </a>
-            <ul class="submenu show" id="arsipTuSubmenu">
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Surat Masuk</a></li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Surat Keluar</a></li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Data Personal
+            <ul class="submenu" id="arsipTuSubmenu">
+                <li><a href="/arsip-tu/surat-masuk" class="submenu-item"><i class="fa-regular fa-folder"></i>Surat
+                        Masuk</a></li>
+                <li><a href="/arsip-tu/surat-keluar" class="submenu-item"><i class="fa-regular fa-folder"></i>Surat
+                        Keluar</a></li>
+                <li><a href="/arsip-tu/data-personal-kesehatan" class="submenu-item"><i
+                            class="fa-regular fa-folder"></i>Data Personal
                         Kesehatan</a>
                 </li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>MoU</a></li>
-                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Latihan Fungsional
+                <li><a href="/arsip-tu/mou" class="submenu-item"><i class="fa-regular fa-folder"></i>MoU</a></li>
+                <li><a href="/arsip-tu/latihan-fungsional-kesehatan" class="submenu-item"><i
+                            class="fa-regular fa-folder"></i>Latihan Fungsional
                         <span class="d-block" style="margin-left: 45px">Kesehatan</span></a>
                 </li>
             </ul>
@@ -45,10 +50,19 @@
 
         <!-- Arsip Medis -->
         <li>
-            <a href="" class="menu-item" data-tooltip="Arsip Medis">
+            <a href="#" class="menu-item dropdown-toggle" data-tooltip="Arsip Medis"
+                data-bs-target="#arsipMedisSubmenu">
                 <i class="fa-solid fa-folder"></i>
                 <span>Arsip Medis</span>
+                <i class="fas fa-chevron-down dropdown-arrow"></i>
             </a>
+            <ul class="submenu" id="arsipMedisSubmenu">
+                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Sertifikat</a></li>
+                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Surat Hibah</a></li>
+                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Barang Masuk</a></li>
+                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Pengadaan Alat</a></li>
+                <li><a href="" class="submenu-item"><i class="fa-regular fa-folder"></i>Pembelian</a></li>
+            </ul>
         </li>
 
         <!-- Unggah Berkas -->

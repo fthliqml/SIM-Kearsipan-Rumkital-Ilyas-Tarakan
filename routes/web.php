@@ -12,8 +12,9 @@ Route::get('/', function () {
     return view('landing-page.index');
 });
 Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/arsip-tu', [ArsipTUController::class, 'index']);
+Route::get('/arsip-tu/{jenis}', [ArsipTUController::class, 'index'])->name('arsip-tu.index');
 Route::get('/unggah-berkas', [UnggahBerkasController::class, 'index']);
 Route::get('/detail-berkas', [DetailBerkasController::class, 'index']);
 Route::get('/referensi-5-tahun', [ReferensiController::class, 'index']);
 Route::get('/pencarian', [PencarianController::class, 'index']);
+

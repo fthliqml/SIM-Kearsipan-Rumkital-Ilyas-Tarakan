@@ -7,59 +7,20 @@ use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 
 class ArsipTUController extends Controller
 {
-    public function index()
+
+    /**
+     * Konfigurasi jenis arsip yang diizinkan
+     */
+    private $jenisArsip = [
+        'surat-masuk' => 'Surat Masuk',
+        'surat-keluar' => 'Surat Keluar',
+        'data-personal-kesehatan' => 'Data Personal Kesehatan',
+        'mou' => 'MoU',
+        'latihan-fungsional-kesehatan' => 'Latihan Fungsional Kesehatan'
+    ];
+
+    public function index($jenis)
     {
-        // dummy data
-        $berkasList = [
-            (object) [
-                'nomor' => '2914440384',
-                'tanggal' => '2024-01-15',
-                'tanggal_kadaluarsa' => '2026-01-12',
-                'jenis' => 'Surat Masuk',
-                'pengirim' => 'Kementerian Kesehatan RI',
-                'status' => 'success',
-            ],
-            (object) [
-                'nomor' => '4013449971',
-                'tanggal' => '2024-01-14',
-                'tanggal_kadaluarsa' => '2027-01-5',
-                'jenis' => 'Data Personal',
-                'pengirim' => 'Bagian Kepegawaian',
-                'status' => 'success',
-            ],
-            (object) [
-                'nomor' => '0376094284',
-                'tanggal' => '2024-01-13',
-                'tanggal_kadaluarsa' => '2027-01-18',
-                'jenis' => 'MoU',
-                'pengirim' => 'RS Mitra Sehat',
-                'status' => 'danger',
-            ],
-            (object) [
-                'nomor' => '4562457704',
-                'tanggal' => '2024-01-12',
-                'tanggal_kadaluarsa' => '2025-01-15',
-                'jenis' => 'Arsip Medis',
-                'pengirim' => 'Poliklinik Umum',
-                'status' => 'danger',
-            ],
-            (object) [
-                'nomor' => '1794000537',
-                'tanggal' => '2024-01-11',
-                'tanggal_kadaluarsa' => '2026-01-15',
-                'jenis' => 'Surat Keluar',
-                'pengirim' => 'Bagian Keuangan',
-                'status' => 'danger',
-            ],
-            (object) [
-                'nomor' => '3554926113',
-                'tanggal' => '2024-01-10',
-                'tanggal_kadaluarsa' => '2025-01-15',
-                'jenis' => 'Latihan Fungsional',
-                'pengirim' => 'Diklat Kesehatan',
-                'status' => 'success',
-            ],
-        ];
 
         $chart = new Chart;
 
@@ -124,6 +85,35 @@ class ArsipTUController extends Controller
             'tooltips' => ['intersect' => false]
         ]);
 
-        return view('arsip-tu.index ', compact(['chart', 'berkasList']));
+        // Validasi jenis arsip
+        if (!array_key_exists($jenis, $this->jenisArsip)) {
+            abort(404, 'Jenis arsip tidak ditemukan');
+        }
+
+        // Get title untuk jenis arsip ini
+        $title = $this->jenisArsip[$jenis];
+
+        // Get dummy data berdasarkan jenis
+        $data = $this->getDummyData($jenis);
+
+        return view('arsip-tu.index', compact(
+            'chart',
+            'title',
+            'data'
+        ));
+
+    }
+
+    /**
+     * Get dummy data berdasarkan jenis arsip
+     */
+    private function getDummyData($jenis)
+    {
+        // Load dummy data from config file
+        $allDummyData = config('dummy-data-tu');
+        $dummyData = $allDummyData[$jenis] ?? [];
+
+        // Convert to collection for easier handling (mirip dengan Eloquent Collection)
+        return collect($dummyData);
     }
 }
